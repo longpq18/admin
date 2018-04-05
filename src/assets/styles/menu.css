@@ -1,0 +1,17 @@
+
+.menu {
+  padding-left: 0 !important;
+}
+
+#menu-left {
+  background: #169f85;
+}
+
+#menu-left ul > li {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+#menu-left ul li > a {
+  color: #fff;
+}
