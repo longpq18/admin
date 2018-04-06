@@ -1,15 +1,21 @@
-// import { Router, Route, Switch } from 'react-router'
-import Category from '../screens/categories/Category.js'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+
 import Home from '../screens/home/Home'
-import Category from '../screens/categories/Category'
+import Category from '../screens/category/Category'
+import Post from '../screens/post/Post'
+import User from '../screens/user/User'
 
 
-const Main = () => (
+const Router = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path='/category' component={Category}/>
+      <Route exact path='/' component={Home} />
+      <Route path='/cat' component={Category} />
+      <Route path='/post' component={Post} />
+      <Route path='/user' component={User} />
     </Switch>
   </main>
 )
+
+export default Router

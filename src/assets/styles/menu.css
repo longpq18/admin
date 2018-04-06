@@ -1,10 +1,18 @@
 
 .menu {
   padding-left: 0 !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* background: #00BFFF; */
+  border-right: 1px solid #2F4F4F;
 }
 
 #menu-left {
-  background: #169f85;
+  /* background: #169f85; */
+  margin-top: 30px;
 }
 
 #menu-left ul > li {
@@ -13,5 +21,5 @@
 }
 
 #menu-left ul li > a {
-  color: #fff;
+  color: #333;
 }

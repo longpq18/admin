@@ -15,10 +15,21 @@ li {
 
 .content {
   min-height: calc(90vh - 103.5px);
+  /* margin: 20px 0; */
+  position: relative;
+}
+
+.content-details {
+  /* background: #ccc; */
 }
 
 #footer {
   clear: both;
-  background: #333;
+  background: #2F4F4F;
   height: 50px;
+}
+
+#footer p {
+  color: #fff;
+  padding-top: 10px;
 }
