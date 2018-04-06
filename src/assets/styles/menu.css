@@ -20,6 +20,10 @@
   padding-bottom: 10px;
 }
 
-#menu-left ul li > a {
+#menu-left ul > li > a {
   color: #333;
+}
+
+#menu-left ul > li > i {
+  margin-right: 5px;
 }
