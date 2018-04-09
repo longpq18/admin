@@ -21,14 +21,16 @@ class User extends Component {
       <div>
           <h2>List user</h2>
           <table className="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Email</th>
-                <th scope="col">Password</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Password</th>
+                  <th scope="col">Status</th>
+                  <th scope="col"></th>
+                  <th scope="col"><a href="#">Add</a></th>
+                </tr>
+              </thead>
 
               <tbody>
                   {listUser.map((item, index)=>
@@ -37,6 +39,8 @@ class User extends Component {
                       <td>{item.email}</td>
                       <td>{item.password}</td>
                       <td>{item.status}</td>
+                      <td>Edit</td>
+                      <td>Delete</td>
                     </tr>
                   )}
               </tbody>
