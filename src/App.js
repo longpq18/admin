@@ -13,8 +13,10 @@ class App extends Component {
         <Header />
         <div className="container-fluid content">
             <div className="row">
-                <div className="col-sm-3 menu">
-                  <MenuLeft />
+                <div className="col-sm-3">
+                  <div className="menu">
+                    <MenuLeft />
+                  </div>
                 </div>
                 <div className="col-sm-9 content-details">
                   <Router />
