@@ -28,7 +28,7 @@ class User extends Component {
                   <th scope="col">Password</th>
                   <th scope="col">Status</th>
                   <th scope="col"></th>
-                  <th scope="col"><a href="#">Add</a></th>
+                  <th scope="col"><a href="/add_user">Add</a></th>
                 </tr>
               </thead>
 

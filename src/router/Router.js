@@ -5,6 +5,7 @@ import Home from '../screens/home/Home'
 import Category from '../screens/category/Category'
 import Post from '../screens/post/Post'
 import User from '../screens/user/User'
+import AddUser from '../screens/user/AddUser'
 
 
 const Router = () => (
@@ -14,6 +15,7 @@ const Router = () => (
       <Route path='/cat' component={Category} />
       <Route path='/post' component={Post} />
       <Route path='/user' component={User} />
+      <Route path='/add_user' component={AddUser} />
     </Switch>
   </main>
 )
