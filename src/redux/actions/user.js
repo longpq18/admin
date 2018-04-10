@@ -1,37 +1,41 @@
-// import * as types from './actionTypes';
-// import catApi from '../api/user';
-//
-// const initState = {
-//   loadingALlUser: false,
-//   data: null,
-//   error: null
-// }
-//
-// export function loadAllUserSuccess(result) {
-//   return {
-//     type: types.LOAD_ALL_USER_SUCCESS,
-//     result
-//   };
-// }
-//
-// export function LoadingAllUser() {
-//   return { type: types.LOADING_ALL_USER }
-// }
+
 import * as types from './actionTypes';
-import Apis from '../api/user';
+import * as APIs from '../constants/serverAPI';
+import Api from '../../libs/api'
 
 export function loadAllUserSuccess(user) {
   return {type: types.LOAD_ALL_USER_SUCCESS, user};
 }
 
 export function loadAllUser() {
-  return function(dispatch) {
-    return Apis.getAllUsers().then(user => {
-      console.log('loadAllUser: ', user)
-      dispatch(loadAllUserSuccess(user));
+  return (dispatch, getState) => {
+        // dispatch(loadWalletRequest());
 
-    }).catch(error => {
-      throw(error);
-    });
-  };
+        return Api.get(APIs.LOAD_ALL_USERS).then(response => {
+            dispatch(loadAllUserSuccess(response));
+        }).catch((ex) => {
+            console.log(ex)
+        })
+    }
+}
+
+// create user
+export function creactUserSuccess(user) {
+    return { type: types.CREATE_USER_SUCCESS, user }
+}
+
+export function createUser(email, password, status=1) {
+  return (dispatch, getState) => {
+    var params = {
+      email: email,
+      password: password,
+      status: status
+    }
+
+    return Api.post(APIs.CREATE_USER, params).then(user => {
+        dispatch(creactUserSuccess(user))
+    }).catch(err => {
+        console.log(err)
+    })
+  }
 }

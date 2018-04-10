@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/styles/index.css';
+import './assets/styles/form.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,8 +11,6 @@ import configureStore from './redux/store/configureStore'
 import { Provider } from 'react-redux'
 
 const store = configureStore()
-
-
 
 ReactDOM.render(
   <Provider store={store} >

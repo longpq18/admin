@@ -27,9 +27,7 @@ class AddUser extends Component {
             passwordId='add-password'
             buttonName='Add User'
             formSubmit={this._handleAddUser}
-            // valueEmail={this.state.email}
             onChangeEmail={ this._handleChangeEmail }
-            // valuePassword={this.state.password}
             onChangePassword={ this._handleChangePassword }
         />
       </div>
@@ -46,11 +44,15 @@ class AddUser extends Component {
 
   _handleAddUser(event) {
       event.preventDefault();
-
-      console.log('this.state.email: ', this.state.email)
-      console.log('this.state.password: ', this.state.password)
+      const email = this.state.email || ''
+      const password = this.state.password || ''
+      this.props.actions.createUser(email, password).then(res => {
+          alert('Success')
+          window.history.back()
+      }).catch(err => {
+          alert(err)
+      })
   }
-
 }
 
 function mapStateToProps(state) {

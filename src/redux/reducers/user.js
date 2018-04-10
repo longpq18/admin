@@ -5,6 +5,8 @@ function user(state=initialState.users, action) {
   switch (action.type) {
     case types.LOAD_ALL_USER_SUCCESS:
       return action.user
+    case types.CREATE_USER_SUCCESS:
+      return action.user
     default:
       return state
   }

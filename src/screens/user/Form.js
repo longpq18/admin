@@ -11,7 +11,7 @@ class Form extends Component {
                       className="form-control"
                       id={this.props.emailId}
                       aria-describedby="emailHelp"
-                      placeholder="Enter email"
+                      // placeholder="Enter email"
                       onChange={this.props.onChangeEmail}
                       value={this.props.valueEmail}
               />
@@ -23,7 +23,7 @@ class Form extends Component {
               <input  type="password"
                       className="form-control"
                       id={this.props.passwordId}
-                      placeholder="Password"
+                      // placeholder="Password"
                       onChange={this.props.onChangePassword}
                       value={this.props.valuePassword}
               />
