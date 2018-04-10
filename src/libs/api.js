@@ -7,8 +7,12 @@ class Api {
     return {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      // 'dataType': 'json',
-      // 'Access-Control-Allow-Origin':'*'
+      // 'Access-Control-Allow-Headers': 'Content-Type',
+      // 'Access-Control-Request-Method': 'PUT, DELETE',
+      // 'Access-Control-Allow-Methods': method,
+      'Access-Control-Allow-Methods': 'PUT, DELETE',
+      // 'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type'
+
     }
   }
 

@@ -39,3 +39,22 @@ export function createUser(email, password, status=1) {
     })
   }
 }
+
+// delete user
+export function deleteUserSuccess(user) {
+  return { type: types.DELETE_USER_SUCCESS, user }
+}
+
+export function deleteUser(id) {
+  return (dispatch, getState) => {
+    var params = {
+      id: id
+    }
+
+    return Api.delete(APIs.DELETE_USER + id, params).then(user => {
+      dispatch(deleteUserSuccess(user))
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+}

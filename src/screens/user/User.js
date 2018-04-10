@@ -2,13 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/user'
+import { Link } from 'react-router-dom'
 
 class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
+    // this._onDeleteUser = this._onDeleteUser.bind(this)
   }
 
   componentWillMount() {
@@ -39,8 +40,8 @@ class User extends Component {
                       <td>{item.email}</td>
                       <td>{item.password}</td>
                       <td>{item.status}</td>
-                      <td>Edit</td>
-                      <td>Delete</td>
+                      <td><Link to='/users/edit'>Edit</Link></td>
+                      <td><button onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
                     </tr>
                   )}
               </tbody>
@@ -49,6 +50,16 @@ class User extends Component {
       </div>
     )
   }
+
+  _onDeleteUser(id) {
+    console.log('Handle Delete User')
+    this.props.actions.deleteUser(id).then(res => {
+      // alert('Delete success')
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
 }
 
 // User.propTypes = {
