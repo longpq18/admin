@@ -6,6 +6,7 @@ import Category from '../screens/category/Category'
 import Post from '../screens/post/Post'
 import User from '../screens/user/User'
 import AddUser from '../screens/user/AddUser'
+import EditUser from '../screens/user/EditUser'
 
 
 const Router = () => (
@@ -16,6 +17,7 @@ const Router = () => (
       <Route path='/post' component={Post} />
       <Route path='/user' component={User} />
       <Route path='/add_user' component={AddUser} />
+      <Route path='/edit_user/:id' component={EditUser} />
     </Switch>
   </main>
 )

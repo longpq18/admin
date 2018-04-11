@@ -7,11 +7,14 @@ export function loadAllUserSuccess(user) {
   return {type: types.LOAD_ALL_USER_SUCCESS, user};
 }
 
-export function loadAllUser() {
+export function loadAllUser(token='123123123') {
   return (dispatch, getState) => {
         // dispatch(loadWalletRequest());
+        var params = {
+          token: token
+        }
 
-        return Api.get(APIs.LOAD_ALL_USERS).then(response => {
+        return Api.get(APIs.LOAD_ALL_USERS, params).then(response => {
             dispatch(loadAllUserSuccess(response));
         }).catch((ex) => {
             console.log(ex)

@@ -6,13 +6,7 @@ class Api {
   static headers() {
     return {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Headers': 'Content-Type',
-      // 'Access-Control-Request-Method': 'PUT, DELETE',
-      // 'Access-Control-Allow-Methods': method,
-      'Access-Control-Allow-Methods': 'PUT, DELETE',
-      // 'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type'
-
+      'Content-Type': 'application/json'
     }
   }
 
@@ -36,10 +30,11 @@ class Api {
     const host = types.BASE_URL
     const url = `${host}${route}`
 
+
     console.log("Api " + verb  + " : "+ url);
     var options = {
       method: verb,
-      headers: Api.headers(),
+      headers: Api.headers()
     }
 
     console.log('options: ', options)

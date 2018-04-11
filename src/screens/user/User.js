@@ -13,7 +13,11 @@ class User extends Component {
   }
 
   componentWillMount() {
-      this.props.actions.loadAllUser();
+      this.props.actions.loadAllUser().then(res => {
+          console.log('Load all user success')
+      }).catch(err => {
+          console.log(err)
+      })
   }
 
   render() {
@@ -35,12 +39,13 @@ class User extends Component {
 
               <tbody>
                   {listUser.map((item, index)=>
+
                     <tr key={index}>
                       <th scope="row">{index+1}</th>
                       <td>{item.email}</td>
                       <td>{item.password}</td>
                       <td>{item.status}</td>
-                      <td><Link to='/users/edit'>Edit</Link></td>
+                      <td><Link to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
                       <td><button onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
                     </tr>
                   )}
@@ -51,10 +56,11 @@ class User extends Component {
     )
   }
 
-  _onDeleteUser(id) {
+  _onDeleteUser(userId) {
     console.log('Handle Delete User')
-    this.props.actions.deleteUser(id).then(res => {
-      // alert('Delete success')
+    this.props.actions.deleteUser(userId).then(res => {
+      alert('Delete success')
+      window.location.reload()
     }).catch(err => {
       console.log(err)
     })

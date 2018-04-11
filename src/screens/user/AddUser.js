@@ -48,10 +48,19 @@ class AddUser extends Component {
       const password = this.state.password || ''
       this.props.actions.createUser(email, password).then(res => {
           alert('Success')
+          this._handleLoadAllUser()
           window.history.back()
       }).catch(err => {
           alert(err)
       })
+  }
+
+  _handleLoadAllUser() {
+    this.props.actions.loadAllUser().then(res => {
+        console.log('Load all user success')
+    }).catch(err => {
+        console.log(err)
+    })
   }
 }
 
