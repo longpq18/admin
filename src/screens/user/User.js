@@ -8,20 +8,22 @@ class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      user: null
     }
     // this._onDeleteUser = this._onDeleteUser.bind(this)
   }
 
   componentWillMount() {
       this.props.actions.loadAllUser().then(res => {
-          console.log('Load all user success')
+          console.log('Load user success')
       }).catch(err => {
+          console.log('Load user failure')
           console.log(err)
       })
   }
 
   render() {
-    let listUser = this.props.user
+
     return(
       <div>
           <h2>List user</h2>
@@ -37,23 +39,36 @@ class User extends Component {
                 </tr>
               </thead>
 
-              <tbody>
-                  {listUser.map((item, index)=>
-
-                    <tr key={index}>
-                      <th scope="row">{index+1}</th>
-                      <td>{item.email}</td>
-                      <td>{item.password}</td>
-                      <td>{item.status}</td>
-                      <td><Link to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
-                      <td><button onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
-                    </tr>
-                  )}
-              </tbody>
+              {this._renderTable()}
 
           </table>
       </div>
     )
+  }
+
+  _renderTable() {
+    if(this.props.user.getUserInfoDone) {
+      let listUser = this.props.user.userData
+      return(
+        <tbody>
+            {listUser.map((item, index)=>
+
+              <tr key={index}>
+                <th scope="row">{index+1}</th>
+                <td>{item.email}</td>
+                <td>{item.password}</td>
+                <td>{item.status}</td>
+                <td><Link to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
+                <td><button onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
+              </tr>
+            )}
+        </tbody>
+      )
+    } else {
+      return(
+        <tbody><tr><td><h2>Loading...</h2></td></tr></tbody>
+      )
+    }
   }
 
   _onDeleteUser(userId) {

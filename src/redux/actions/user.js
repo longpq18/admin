@@ -3,21 +3,53 @@ import * as types from './actionTypes';
 import * as APIs from '../constants/serverAPI';
 import Api from '../../libs/api'
 
+// login
+export function loginSuccess(token) {
+  return { type: types.LOGIN_SUCCESS, token }
+}
+
+export function login(email, password) {
+  return( dispatch, getState ) => {
+    var params = {
+      email: email,
+      password: password
+    }
+
+    return Api.post(APIs.LOGIN, params).then(res => {
+      console.log('Login res: ', res)
+      dispatch(loginSuccess(res))
+    }).catch(err => {
+      console.log('Action login error: ', err)
+    })
+  }
+}
+
+
+// load all user
 export function loadAllUserSuccess(user) {
   return {type: types.LOAD_ALL_USER_SUCCESS, user};
 }
 
-export function loadAllUser(token='123123123') {
-  return (dispatch, getState) => {
-        // dispatch(loadWalletRequest());
-        var params = {
-          token: token
-        }
+export function loadAllUserRequest(user) {
+  return {type: types.LOAD_ALL_USER_REQUEST, user};
+}
 
-        return Api.get(APIs.LOAD_ALL_USERS, params).then(response => {
+export function loadAllUserFailure(user) {
+  return {type: types.LOAD_ALL_USER_FAILURE, user};
+}
+
+export function loadAllUser(token='') {
+  return (dispatch, getState) => {
+        dispatch(loadAllUserRequest());
+        // var params = {
+        //   token: token
+        // }
+
+        return Api.get(APIs.LOAD_ALL_USERS).then(response => {
             dispatch(loadAllUserSuccess(response));
         }).catch((ex) => {
             console.log(ex)
+            dispatch(loadAllUserFailure())
         })
     }
 }
@@ -60,4 +92,9 @@ export function deleteUser(id) {
       console.log(err)
     })
   }
+}
+
+// update user
+export function updateUserSuccess(user) {
+  return { type: types.UPDATE_USER_SUCCESS }
 }

@@ -1,3 +1,16 @@
 #form-add-user label {
   float: left;
 }
+
+.login-form {
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 15%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form  h2 {
+  text-align: center;
+}

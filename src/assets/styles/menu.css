@@ -1,18 +1,14 @@
 
 .menu {
   padding-left: 0 !important;
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  min-height: calc(100vh - 200px);
   /* background: #00BFFF; */
   border-right: 1px solid #2F4F4F;
 }
 
 #menu-left {
   /* background: #169f85; */
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
 #menu-left ul > li {
