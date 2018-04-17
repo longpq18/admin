@@ -38,6 +38,10 @@ export function loadAllUserFailure(user) {
   return {type: types.LOAD_ALL_USER_FAILURE, user};
 }
 
+export function persist(user) {
+  return { type: 'persist/PERSIST', user }
+}
+
 export function loadAllUser(token='') {
   return (dispatch, getState) => {
         dispatch(loadAllUserRequest());
@@ -47,6 +51,7 @@ export function loadAllUser(token='') {
 
         return Api.get(APIs.LOAD_ALL_USERS).then(response => {
             dispatch(loadAllUserSuccess(response));
+            dispatch(persist(response))
         }).catch((ex) => {
             console.log(ex)
             dispatch(loadAllUserFailure())
@@ -56,15 +61,16 @@ export function loadAllUser(token='') {
 
 // create user
 export function creactUserSuccess(user) {
-    return { type: types.CREATE_USER_SUCCESS, user }
+    return {
+      type: types.CREATE_USER_SUCCESS, user
+    }
 }
 
-export function createUser(email, password, status=1) {
+export function createUser(email, password) {
   return (dispatch, getState) => {
     var params = {
       email: email,
-      password: password,
-      status: status
+      password: password
     }
 
     return Api.post(APIs.CREATE_USER, params).then(user => {

@@ -3,6 +3,8 @@ import LoginForm from './FormLogin'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/user'
+import { Redirect, Route } from 'react-router-dom'
+// import {browserHistory} from 'react-router';
 
 class Login extends Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class Login extends Component {
     this._onChangeEmail = this._onChangeEmail.bind(this)
     this._onChangePassword = this._onChangePassword.bind(this)
     this._handleLogin = this._handleLogin.bind(this)
+    // this.handleLink = this.handleLink.bind(this)
   }
 
   _onChangeEmail(event) {
@@ -31,7 +34,8 @@ class Login extends Component {
     const password = this.state.password || ''
 
     this.props.actions.login(email, password).then(res => {
-      console.log('Login res: ', res)
+      this.props.history.push('/home')
+
     }).catch(err => {
       console.log('Login error: ', err)
     })
@@ -42,11 +46,11 @@ class Login extends Component {
       <div className='login-form'>
         <h2>Login</h2>
         <LoginForm
-            formLoginId = 'login-form-id'
-            formLoginSubmit = { this._handleLogin }
-            onChangeEmail = { this._onChangeEmail }
-            onChangePassword = { this._onChangePassword }
-        />
+              formLoginId = 'login-form-id'
+              formLoginSubmit = { this._handleLogin }
+              onChangeEmail = { this._onChangeEmail }
+              onChangePassword = { this._onChangePassword }
+          />
       </div>
     )
   }

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './assets/styles/App.css';
 import './assets/styles/menu.css';
-import Header from './components/header'
-import Footer from './components/footer'
-import MenuLeft from './components/menu-left'
-import Router from './router/Router'
-import Login from './screens/login/Login'
+import routes from './router/Router';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -15,40 +12,29 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-
+  showContent = (routes) => {
+    var result = null;
+    if(routes.length > 0) {
+      result = routes.map((route, index) => {
+        return (
+          <Route key={index} path={route.path} exact={route.exact} component={route.main} />
+        );
+      });
+    }
+    return result;
   }
+
+  componentDidMount() {}
 
   render() {
-
       return (
-        <MainContent />
+        <Router>
+          <Switch>
+              {this.showContent(routes)}
+          </Switch>
+      </Router>
       )
-    
   }
 }
-
-class MainContent extends Component {
-    render() {
-      return(
-        <div className="App container-fluid" id="wrapper">
-          <Header />
-          <div className="container-fluid content">
-              <div className="row">
-                  <div className="col-sm-3">
-                    <div className="menu">
-                      <MenuLeft />
-                    </div>
-                  </div>
-                  <div className="col-sm-9 content-details">
-                    <Router />
-                  </div>
-              </div>
-          </div>
-          <Footer />
-        </div>
-      )
-    }
-  }
 
 export default App;

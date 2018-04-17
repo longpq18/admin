@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/user'
 import Form from './Form'
+import MainLayout from '../../layouts/MainLayout'
 
 class AddUser extends Component {
   constructor(props) {
@@ -20,17 +21,19 @@ class AddUser extends Component {
 
   render() {
     return(
-      <div>
-        <Form
-            formId='form-add-user'
-            emailId='add-email'
-            passwordId='add-password'
-            buttonName='Add User'
-            formSubmit={this._handleAddUser}
-            onChangeEmail={ this._handleChangeEmail }
-            onChangePassword={ this._handleChangePassword }
-        />
-      </div>
+      <MainLayout>
+        <div>
+          <Form
+              formId='form-add-user'
+              emailId='add-email'
+              passwordId='add-password'
+              buttonName='Add User'
+              formSubmit={this._handleAddUser}
+              onChangeEmail={ this._handleChangeEmail }
+              onChangePassword={ this._handleChangePassword }
+          />
+        </div>
+      </MainLayout>
     )
   }
 
@@ -49,7 +52,7 @@ class AddUser extends Component {
       this.props.actions.createUser(email, password).then(res => {
           alert('Success')
           this._handleLoadAllUser()
-          window.history.back()
+          this.props.history.goBack()
       }).catch(err => {
           alert(err)
       })

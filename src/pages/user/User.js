@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/user'
 import { Link } from 'react-router-dom'
+import MainLayout from '../../layouts/MainLayout'
 
 class User extends Component {
   constructor(props) {
@@ -25,24 +26,26 @@ class User extends Component {
   render() {
 
     return(
-      <div>
-          <h2>List user</h2>
-          <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Password</th>
-                  <th scope="col">Status</th>
-                  <th scope="col"></th>
-                  <th scope="col"><a href="/add_user">Add</a></th>
-                </tr>
-              </thead>
+      <MainLayout>
+        <div>
+            <h2>List user</h2>
+            <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                    <th scope="col"><a href="/add_user">Add</a></th>
+                  </tr>
+                </thead>
 
-              {this._renderTable()}
+                {this._renderTable()}
 
-          </table>
-      </div>
+            </table>
+        </div>
+      </MainLayout>
     )
   }
 
