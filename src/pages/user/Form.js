@@ -10,12 +10,10 @@ class Form extends Component {
               <input  type="email"
                       className="form-control"
                       id={this.props.emailId}
-                      aria-describedby="emailHelp"
-                      // placeholder="Enter email"
                       onChange={this.props.onChangeEmail}
                       value={this.props.valueEmail}
+                      name={this.props.nameEmail}
               />
-              <small id="emailHelp" className="form-text text-muted"></small>
             </div>
 
             <div className="form-group">
@@ -26,6 +24,7 @@ class Form extends Component {
                       // placeholder="Password"
                       onChange={this.props.onChangePassword}
                       value={this.props.valuePassword}
+                      name={this.props.namePassword}
               />
             </div>
 
@@ -43,7 +42,11 @@ Form.defaultProp = {
   buttonName: 'Submit',
   valueEmail: '',
   valuePassword: '',
-  formSubmit:() => {}
+  nameEmail: '',
+  namePassword: '',
+  formSubmit:() => {},
+  onChangeEmail: () => {},
+  onChangePassword: () => {}
 }
 
 export default Form

@@ -14,6 +14,8 @@ class App extends Component {
 
   showContent = (routes) => {
     var result = null;
+    // const token = localStorage.getItem('token');
+    // if(token)
     if(routes.length > 0) {
       result = routes.map((route, index) => {
         return (

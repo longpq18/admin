@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import LoginForm from './FormLogin'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as actions from '../../redux/actions/user'
-import { Redirect, Route } from 'react-router-dom'
-// import {browserHistory} from 'react-router';
+import * as actions from '../../redux/actions/account'
 
 class Login extends Component {
   constructor(props) {
@@ -34,8 +32,11 @@ class Login extends Component {
     const password = this.state.password || ''
 
     this.props.actions.login(email, password).then(res => {
-      this.props.history.push('/home')
-
+      if(this.props.account.isLoginDone) {
+        const token = this.props.account.token
+        localStorage.setItem('token', token)
+        this.props.history.push('/home')
+      }
     }).catch(err => {
       console.log('Login error: ', err)
     })
@@ -58,7 +59,7 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     return {
-      user: state.user
+      account: state.account
     }
 }
 

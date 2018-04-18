@@ -37,7 +37,7 @@ class User extends Component {
                     <th scope="col">Password</th>
                     <th scope="col">Status</th>
                     <th scope="col"></th>
-                    <th scope="col"><a href="/add_user">Add</a></th>
+                    <th scope="col"><Link to="/add_user" className='btn btn-success'>Add</Link></th>
                   </tr>
                 </thead>
 
@@ -50,8 +50,8 @@ class User extends Component {
   }
 
   _renderTable() {
-    if(this.props.user.getUserInfoDone) {
-      let listUser = this.props.user.userData
+    if(this.props.user.getAllUserInfoDone) {
+      let listUser = this.props.user.userData || []
       return(
         <tbody>
             {listUser.map((item, index)=>
@@ -61,8 +61,8 @@ class User extends Component {
                 <td>{item.email}</td>
                 <td>{item.password}</td>
                 <td>{item.status}</td>
-                <td><Link to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
-                <td><button onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
+                <td><Link className='btn btn-primary' to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
+                <td><button className='btn btn-danger' onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
               </tr>
             )}
         </tbody>

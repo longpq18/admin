@@ -10,23 +10,28 @@ import {createReducer, updateObject} from './reducerUtilities.js'
 
 const initState = {
   userData: null,
+  userDetail: null,
   error: null,
-  getingAllUserInfo: false,
-  getUserInfoDone: false
+
+  getAllUserInfoRequest: false,
+  getAllUserInfoDone: false,
+  getUserInfoRequest: false,
+  getUserInfoDone: false,
 }
 
+// get all users
 function getAllUserInfoRequest(state, action) {
     return updateObject(state, {
-        getingAllUserInfo: true,
-        getUserInfoDone: false,
+        getAllUserInfoRequest: true,
+        getAllUserInfoDone: false,
         error: null,
     });
 }
 
 function getAllUserInfoFailure(state, action) {
     return updateObject(state, {
-        getingAllUserInfo: false,
-        getUserInfoDone: false,
+        getAllUserInfoRequest: false,
+        getAllUserInfoDone: false,
         error: action.error,
     });
 }
@@ -34,9 +39,36 @@ function getAllUserInfoFailure(state, action) {
 function getAllUserInfoSuccess(state, action) {
     console.log('getAllUserInfoSuccess action: ', action.user)
     return updateObject(state, {
-        getingAllUserInfo: false,
-        getUserInfoDone: true,
+        getAllUserInfoRequest: false,
+        getAllUserInfoDone: true,
         userData: action.user,
+        error: null,
+    });
+}
+
+// get user info
+function getUserInfoRequest(state, action) {
+    return updateObject(state, {
+        getAllUserInfoRequest: true,
+        getAllUserInfoDone: false,
+        error: null,
+    });
+}
+
+function getUserInfoFailure(state, action) {
+    return updateObject(state, {
+        getAllUserInfoRequest: false,
+        getAllUserInfoDone: false,
+        error: action.error,
+    });
+}
+
+function getUserInfoSuccess(state, action) {
+    console.log('getUserInfoSuccess action: ', action.user)
+    return updateObject(state, {
+        getAllUserInfoRequest: false,
+        getAllUserInfoDone: true,
+        userDetail: action.user,
         error: null,
     });
 }
@@ -44,7 +76,10 @@ function getAllUserInfoSuccess(state, action) {
 const userReducer = createReducer(initState, {
   [types.LOAD_ALL_USER_REQUEST]: getAllUserInfoRequest,
   [types.LOAD_ALL_USER_SUCCESS]: getAllUserInfoSuccess,
-  [types.LOAD_ALL_USER_FAILURE]: getAllUserInfoFailure
+  [types.LOAD_ALL_USER_FAILURE]: getAllUserInfoFailure,
+  [types.GET_USER_INFO_REQUEST]: getUserInfoRequest,
+  [types.GET_USER_INFO_SUCCESS]: getUserInfoSuccess,
+  [types.GET_USER_INFO_FAILURE]: getUserInfoFailure,
 });
 
 export default userReducer

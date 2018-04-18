@@ -19,26 +19,27 @@ class EditUser extends Component {
     this._handleChangePassword = this._handleChangePassword.bind(this)
   }
 
-  componentDidMount() {
-    // this.props.actions.loadAllUser().then(res => {
-    //     console.log('Load all user success')
-    // }).catch(err => {
-    //     console.log(err)
-    // })
+  componentWillMount() {
+    const id = this.state.userId
+    this.props.actions.getUserInfo(id).then(res => {
+        console.log('Load user info success')
+    }).catch(err => {
+        console.log(err)
+    })
   }
 
   _handleChangeEmail(event) {
     this.setState({email: event.target.value});
-    console.log()
   }
+
   _handleChangePassword(event) {
     this.setState({password: event.target.value});
   }
 
   _handleUpdateUser(event) {
     event.preventDefault()
-    const email = this.state.email
-    const password = this.state.password
+    let email = this.state.email
+    let password = this.state.password
 
     this.props.actions.updateUser(email, password).then(res => {
       alert('Update success')
@@ -48,16 +49,12 @@ class EditUser extends Component {
   }
 
   render() {
-    // console.log('this.props: ', this.props)
-    // console.log('this.props.user: ', this.props.user)
     let user = {
       email: '',
       password: '',
       status: ''
     }
-
-    const userData = this.props.user.userData || []
-
+    const userData = this.props.user.userDetail || []
     userData.find(x => {
       if(x._id === this.props.match.params.id) {
         user = {
@@ -65,12 +62,11 @@ class EditUser extends Component {
           password: x.password,
           status: x.status
         }
-
       }
     })
 
     return(
-      <MainLayout>
+       <MainLayout>
         <div>
           <h3>Edit user</h3>
           <Form
@@ -79,8 +75,10 @@ class EditUser extends Component {
               passwordId='edit-password'
               buttonName='Update User'
               formSubmit={this._handleUpdateUser}
-              valueEmail={user.email}
-              valuePassword={user.password}
+              valueEmail='email'
+              valuePassword='123123'
+              nameEmail='email'
+              namePassword='password'
               onChangeEmail={ this._handleChangeEmail }
               onChangePassword={ this._handleChangePassword }
           />

@@ -1,4 +1,5 @@
-#form-add-user label {
+#form-add-user label,
+#form-edit-user label {
   float: left;
 }
 
