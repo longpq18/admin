@@ -5,15 +5,15 @@ import Api from '../../libs/api'
 
 
 // load all user
-export function loadAllUserSuccess(user) {
+function loadAllUserSuccess(user) {
   return {type: types.LOAD_ALL_USER_SUCCESS, user};
 }
 
-export function loadAllUserRequest(user) {
+function loadAllUserRequest(user) {
   return {type: types.LOAD_ALL_USER_REQUEST, user};
 }
 
-export function loadAllUserFailure(user) {
+function loadAllUserFailure(user) {
   return {type: types.LOAD_ALL_USER_FAILURE, user};
 }
 
@@ -30,7 +30,7 @@ export function loadAllUser(token='') {
 }
 
 // create user
-export function creactUserSuccess(user) {
+function creactUserSuccess(user) {
     return {
       type: types.CREATE_USER_SUCCESS, user
     }
@@ -71,20 +71,46 @@ export function deleteUser(id) {
 }
 
 // update user
-export function updateUserSuccess(user) {
-  return { type: types.UPDATE_USER_SUCCESS }
+function updateUserSuccess(user) {
+  return { type: types.UPDATE_USER_SUCCESS, user }
+}
+
+function updateUserRequest() {
+  return { type: types.UPDATE_USER_REQUEST }
+}
+
+function updateUserFailure() {
+  return { type: types.UPDATE_USER_FAILURE }
+}
+
+export function updateUser(id, email, password) {
+  const params = {
+    id: id,
+    email: email,
+    password: password
+  }
+  return (dispatch, getState) => {
+    dispatch(updateUserRequest())
+    return Api.put(APIs.UPDATE_USER + id, params).then(user => {
+      console.log('updateUserRequest user: ', user)
+      dispatch(updateUserSuccess(user))
+    }).catch(err => {
+      dispatch(updateUserFailure())
+      console.log('updateUserFailure: ', err)
+    })
+  }
 }
 
 // get user info
-export function getUserInfoRequest(user) {
+function getUserInfoRequest(user) {
     return { type: types.GET_USER_INFO_REQUEST }
 }
 
-export function getUserInfoSuccess(user) {
+function getUserInfoSuccess(user) {
   return { type: types.GET_USER_INFO_SUCCESS, user }
 }
 
-export function getUserInfoFailure(user) {
+function getUserInfoFailure(user) {
   return { type: types.GET_USER_INFO_FAILURE }
 }
 
@@ -95,7 +121,6 @@ export function getUserInfo(id) {
 
     return Api.get(APIs.GET_USER_INFO + id).then(user => {
       dispatch(getUserInfoSuccess(user.result))
-      console.log('get user info: ', user)
     }).catch(err => {
       console.log(err)
       dispatch(getUserInfoFailure())

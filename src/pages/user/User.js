@@ -9,7 +9,7 @@ class User extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: null
+      user: []
     }
     // this._onDeleteUser = this._onDeleteUser.bind(this)
   }
@@ -21,6 +21,16 @@ class User extends Component {
           console.log('Load user failure')
           console.log(err)
       })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps nextProps: ', nextProps)
+    const oldProps = this.props.user.userData
+    const newProps = nextProps.user.userData
+
+    if(newProps !== oldProps) {
+      this.setState({user: newProps})
+    }
   }
 
   render() {
@@ -51,7 +61,7 @@ class User extends Component {
 
   _renderTable() {
     if(this.props.user.getAllUserInfoDone) {
-      let listUser = this.props.user.userData || []
+      let listUser = this.state.user !== '' ? this.state.user : this.props.user.userData
       return(
         <tbody>
             {listUser.map((item, index)=>

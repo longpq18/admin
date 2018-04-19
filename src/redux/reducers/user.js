@@ -17,6 +17,8 @@ const initState = {
   getAllUserInfoDone: false,
   getUserInfoRequest: false,
   getUserInfoDone: false,
+  getUpdateUserRequest: false,
+  getUpdateUserDone: false,
 }
 
 // get all users
@@ -49,16 +51,16 @@ function getAllUserInfoSuccess(state, action) {
 // get user info
 function getUserInfoRequest(state, action) {
     return updateObject(state, {
-        getAllUserInfoRequest: true,
-        getAllUserInfoDone: false,
+        getUserInfoRequest: true,
+        getUserInfoDone: false,
         error: null,
     });
 }
 
 function getUserInfoFailure(state, action) {
     return updateObject(state, {
-        getAllUserInfoRequest: false,
-        getAllUserInfoDone: false,
+        getUserInfoRequest: false,
+        getUserInfoDone: false,
         error: action.error,
     });
 }
@@ -66,11 +68,39 @@ function getUserInfoFailure(state, action) {
 function getUserInfoSuccess(state, action) {
     console.log('getUserInfoSuccess action: ', action.user)
     return updateObject(state, {
-        getAllUserInfoRequest: false,
-        getAllUserInfoDone: true,
+        getUserInfoRequest: false,
+        getUserInfoDone: true,
         userDetail: action.user,
         error: null,
     });
+}
+
+// update user
+function getUpdateUserRequest(state, action) {
+    return updateObject(state, {
+      getUpdateUserRequest: true,
+      getUpdateUserDone: false,
+      error: null
+    })
+}
+
+function getUpdateUserFailure(state, action) {
+    return updateObject(state, {
+      getUpdateUserRequest: false,
+      getUpdateUserDone: false,
+      error: action.error
+    })
+}
+
+function getUpdateUserSuccess(state, action) {
+    const id = action.user.id
+    console.log('getUpdateUserSuccess action: ', action)
+
+    return updateObject(state, {
+      getUpdateUserRequest: false,
+      getUpdateUserDone: true,
+      userData: action.user
+    })
 }
 
 const userReducer = createReducer(initState, {
@@ -80,6 +110,9 @@ const userReducer = createReducer(initState, {
   [types.GET_USER_INFO_REQUEST]: getUserInfoRequest,
   [types.GET_USER_INFO_SUCCESS]: getUserInfoSuccess,
   [types.GET_USER_INFO_FAILURE]: getUserInfoFailure,
+  [types.UPDATE_USER_REQUEST]: getUpdateUserRequest,
+  [types.UPDATE_USER_SUCCESS]: getUpdateUserSuccess,
+  [types.UPDATE_USER_FAILURE]: getUpdateUserFailure,
 });
 
 export default userReducer

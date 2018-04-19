@@ -55,7 +55,7 @@ class Category extends Component {
                 <th scope="row">{index+1}</th>
                 <td>{item.name}</td>
                 <td>{item.status}</td>
-                <td><Link className='btn btn-primary' to={{pathname: `/edit_user/${item._id}`, params: item }}>Edit</Link></td>
+                <td><a className='btn btn-primary'>Edit</a></td>
                 <td><button className='btn btn-danger' onClick={() => { this._onDeleteUser(item._id) }}>Delete</button></td>
               </tr>
             )}

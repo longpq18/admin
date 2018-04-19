@@ -38,12 +38,12 @@ class AddUser extends Component {
   }
 
   _handleChangeEmail(event) {
-   this.setState({email: event.target.value});
- }
+    this.setState({email: event.target.value});
+  }
 
  _handleChangePassword(event) {
-  this.setState({password: event.target.value});
-}
+   this.setState({password: event.target.value});
+  }
 
   _handleAddUser(event) {
       event.preventDefault();

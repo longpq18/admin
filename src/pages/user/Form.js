@@ -11,6 +11,7 @@ class Form extends Component {
                       className="form-control"
                       id={this.props.emailId}
                       onChange={this.props.onChangeEmail}
+                      defaultValue={this.props.defaultValueEmail}
                       value={this.props.valueEmail}
                       name={this.props.nameEmail}
               />
@@ -23,12 +24,13 @@ class Form extends Component {
                       id={this.props.passwordId}
                       // placeholder="Password"
                       onChange={this.props.onChangePassword}
+                      defaultValue={this.props.defaultValuePassword}
                       value={this.props.valuePassword}
                       name={this.props.namePassword}
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">{this.props.buttonName}</button>
+            <button type="submit" className="btn btn-primary" disabled={this.props.disabled}>{this.props.buttonName}</button>
           </form>
       </div>
     )
@@ -44,6 +46,9 @@ Form.defaultProp = {
   valuePassword: '',
   nameEmail: '',
   namePassword: '',
+  defaultValueEmail: '',
+  defaultValuePassword: '',
+  disabled: '',
   formSubmit:() => {},
   onChangeEmail: () => {},
   onChangePassword: () => {}
